@@ -1,0 +1,20 @@
+# dataset
+my_scripts/dataset/
+**/dataset/
+
+# YOLO outputs
+runs/
+weights/
+
+# ultralytics（如果你用 pip install）
+ultralytics/
+
+# models
+*.pt
+*.pth
+
+*jpg
+*mp4
+
+# windows junk
+*:Zone.Identifier
