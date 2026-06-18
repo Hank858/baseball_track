@@ -1,7 +1,8 @@
 from ultralytics import YOLO
 
 # 1. 載入 YOLO11 預訓練模型
-model = YOLO('./model/ball_tracking_v4-YOLOv11.pt')
+# model = YOLO('./model/ball_tracking_v4-YOLOv11.pt')
+model = YOLO('./model/last.pt')
 
 # 2. 執行微調
 results = model.train(
@@ -18,6 +19,7 @@ results = model.train(
     save=True,                 # 儲存 best.pt / last.pt
     amp=True,                  # 混合精度訓練（節省顯存）
     plots=True,                # 產生訓練曲線圖
+    resume=True              # 從頭開始訓練（如果要繼續訓練，設為 True 並指定 weights）
 )
 
 print(f"訓練完成！最佳模型：runs/train/yolo11_finetune/weights/best.pt")
