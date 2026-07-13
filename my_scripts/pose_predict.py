@@ -85,10 +85,10 @@ while cap.isOpened():
         left_hip = kpts[11] # 左臀
         right_hip = kpts[12] # 右臀
         
-        left_x = int(left_shoulder[0])
-        left_y = int(left_shoulder[1])
-        right_x = int(right_shoulder[0])
-        right_y = int(right_shoulder[1])
+        left_shoulder_x = int(left_shoulder[0])
+        left_shoulder_y = int(left_shoulder[1])
+        right_shoulder_x = int(right_shoulder[0])
+        right_shoulder_y = int(right_shoulder[1])
         left_knee_x = int(left_knee[0])
         left_knee_y = int(left_knee[1])
         right_knee_x = int(right_knee[0])
@@ -104,8 +104,8 @@ while cap.isOpened():
         strike_zone_top[1] = (left_shoulder[1] + left_hip[1]) / 2 # y
 
         # 畫一個實心的紅色圓點 (BGR格式，紅色是 0, 0, 255)
-        cv2.circle(frame, (left_x, left_y), radius=6, color=(0, 0, 255), thickness=-1)
-        cv2.circle(frame, (right_x, right_y), radius=6, color=(0, 0, 255), thickness=-1)
+        cv2.circle(frame, (left_shoulder_x, left_shoulder_y), radius=6, color=(0, 0, 255), thickness=-1)
+        cv2.circle(frame, (right_shoulder_x, right_shoulder_y), radius=6, color=(0, 0, 255), thickness=-1)
         cv2.circle(frame, (left_knee_x, left_knee_y), radius=6, color=(0, 0, 255), thickness=-1)
         cv2.circle(frame, (right_knee_x, right_knee_y), radius=6, color=(0, 0, 255), thickness=-1)
         cv2.circle(frame, (left_hip_x, left_hip_y), radius=6, color=(0, 0, 255), thickness=-1)
@@ -116,9 +116,9 @@ while cap.isOpened():
         # cv2.rectangle(frame, (int(left_shoulder[0]), int(strike_zone_top[1])), (int(left_knee_x), int(left_knee_y)), (255, 0, 0), 2)
         
         # 你甚至可以在點的旁邊寫上文字標籤
-        cv2.putText(frame, "L-Shoulder", (left_x + 10, left_y), 
+        cv2.putText(frame, "L-Shoulder", (left_shoulder_x + 10, left_shoulder_y), 
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
-        cv2.putText(frame, "R-Shoulder", (right_x + 10, right_y), 
+        cv2.putText(frame, "R-Shoulder", (right_shoulder_x + 10, right_shoulder_y), 
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
         cv2.putText(frame, "L-Knee", (left_knee_x + 10, left_knee_y), 
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
