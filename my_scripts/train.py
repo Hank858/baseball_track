@@ -1,9 +1,9 @@
 from ultralytics import YOLO
 
-# 1. 載入 YOLO11 預訓練模型
+# 1. 載入 YOLO11 訓練模型
 # model = YOLO('./model/ball_tracking_v4-YOLOv11.pt')
 # model = YOLO('./model/glove_tracking_v4_YOLOv11.pt')
-# model = YOLO('yolo11s.pt')  # 載入上次訓練的權重檔案
+# model = YOLO('yolo11s.pt')  
 model = YOLO('../ultralytics/runs/detect/freeze_10_fulltracking/weights/last.pt')
 
 # 2. 執行微調
