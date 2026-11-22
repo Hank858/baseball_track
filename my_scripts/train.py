@@ -1,6 +1,6 @@
 from ultralytics import YOLO
 
-# 1. 載入 YOLO11 預訓練模型
+# 1. 載入 YOLO11 訓練模型
 # model = YOLO('./model/ball_tracking_v4-YOLOv11.pt')
 # model = YOLO('./model/glove_tracking_v4_YOLOv11.pt')
 # model = YOLO('yolo11s.pt')  # 載入上次訓練的權重檔案
@@ -38,7 +38,7 @@ results = model.train(
     save=True,
     amp=True,
     plots=True,
-    resume=False,    # ❗一定要 False
+    resume=False,    # 一定要 False
     # === 資料增強參數 ===
     degrees=10.0,        # 隨機旋轉 ±10 度
     translate=0.1,       # 隨機平移
