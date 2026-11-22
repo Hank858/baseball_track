@@ -1,17 +1,15 @@
 import cv2
 from ultralytics import YOLO
 
-# 1. 載入你剛剛訓練出來的最強模型
-# 注意：請根據你的實際路徑調整，這裡是假設你在 my_scripts 資料夾下執行
+# 1. 載入模型
 model_path_a = './model/pitcher_hitter_catcher_detector_v3.pt' # 偵測打者
 model_path_b = './model/yolo11n-pose.pt' # 偵測打者pose
-model_path_c = './model/glove_tracking_v4_YOLOv11.pt' # 替換成你的模型路徑
+model_path_c = './model/glove_tracking_v4_YOLOv11.pt'
 model_a = YOLO(model_path_a)
 model_b = YOLO(model_path_b)
 model_c = YOLO(model_path_c)
 
-# 2. 設定你要測試的圖片路徑
-# 假設圖片放在上一層的 yolo_project 根目錄下
+# 2. 設定測試的圖片路徑
 source_img = 'room.jpg'
 source_video = './test_video/WBC_test.mp4'
 homeplate = [None, None]  # 初始化本壘板座標
@@ -19,8 +17,6 @@ homeplate = [None, None]  # 初始化本壘板座標
 print(model_a.names) # model class names
 
 # 3. 進行預測 (推論)
-# save=True：讓 YOLO 自動把畫好框線的結果存成圖片
-# conf=0.5：信心度門檻，代表只顯示模型有 50% 以上把握的目標（可自由調整 0.1 ~ 0.9）
 
 # 讀取影片
 cap = cv2.VideoCapture('./test_video/WBC_test.mp4')
@@ -61,8 +57,8 @@ while cap.isOpened():
     results_bat = model_a(frame, conf=0.2, classes = [0]) # 只偵測打者
     results_pose = model_b(frame, conf=0.2) # 偵測姿態
     
-    result_bat = results_bat[0]  # 取出第一個結果 (因為我們只處理一個 frame)
-    result_pose = results_pose[0]  # 取出第一個結果 (因為我們只處理一個 frame)
+    result_bat = results_bat[0]  # 取出第一個結果 
+    result_pose = results_pose[0]  # 取出第一個結果 
     
     # 確保畫面中有抓到人
     if len(result_pose.boxes) > 0:
@@ -129,21 +125,6 @@ while cap.isOpened():
         cv2.putText(frame, "R-Hip", (right_hip_x + 10, right_hip_y), 
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
 
-        # 2. 將打者的骨架畫在原本的 frame 上
-        # 參數解密：
-        # boxes=False: 不要畫方形 Bounding Box 和標籤 (超級重要！)
-        # kpt_radius=4, kpt_line=2: 控制骨架點的大小與線條粗細
-        # frame = batter_only_result.plot(
-        #     boxes=True,      # 只留姿態，不要方框
-        #     kpt_radius=4,     # 關節點圓圈半徑
-        #     kpt_line=4,       # 骨架連線粗細
-        #     img=frame         # 指定畫在我們原本的影像上
-        # )
-        
-        # (選用) 既然抓到了打者專屬的 batter_only_result，
-        # 你也可以在這裡把他的肩膀 (點5, 6) 和膝蓋 (點13, 14) 座標抽出來算好球帶了！
-        # keypoints = batter_only_result.keypoints.xy[0] 
-
         # 顯示即時影像
         cv2.imshow("Baseball Tracking Test", frame)
     
@@ -153,4 +134,4 @@ while cap.isOpened():
 cap.release()
 cv2.destroyAllWindows()
         
-print("\n✅ 推論完成！請去本機端的 yolo_project/runs/detect/predict/ 資料夾查看結果圖片。")
+print("\n 推論完成")

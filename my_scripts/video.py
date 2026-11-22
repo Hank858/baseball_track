@@ -4,7 +4,6 @@ import os
 video_path = './test_video/pitchlab.mp4'
 output_dir = 'images'
 
-# 如果資料夾不存在，就創建
 os.makedirs(output_dir, exist_ok=True)
 
 cap = cv2.VideoCapture(video_path)
@@ -17,7 +16,7 @@ while True:
         break
 
     if frame_count % interval == 0:
-        # 使用序號存檔名，格式化成 00001.jpg, 00002.jpg ...
+        # 使用序號存檔名
         filename = os.path.join(output_dir, f'frame_{frame_count:05d}.jpg')
         cv2.imwrite(filename, frame)
 

@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 7
+names: ['baseball', 'glove', 'homeplate', 'not_ready_hitter', 'pitcher', 'ready_hitter', 'rubber']
+
+roboflow:
+  workspace: 1327s-workspace
+  project: baseball_elements_track
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/1327s-workspace/baseball_elements_track/dataset/3
