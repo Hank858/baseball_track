@@ -111,7 +111,6 @@ while cap.isOpened():
         cv2.rectangle(frame, (homeplate[0], int(strike_zone_top[1])), (homeplate[1], int(left_knee_y)), (255, 0, 0), 2)
         # cv2.rectangle(frame, (int(left_shoulder[0]), int(strike_zone_top[1])), (int(left_knee_x), int(left_knee_y)), (255, 0, 0), 2)
         
-        # 你甚至可以在點的旁邊寫上文字標籤
         cv2.putText(frame, "L-Shoulder", (left_shoulder_x + 10, left_shoulder_y), 
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
         cv2.putText(frame, "R-Shoulder", (right_shoulder_x + 10, right_shoulder_y), 
